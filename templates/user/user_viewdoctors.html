@@ -1,0 +1,47 @@
+{% extends 'user/user_dashboard.html' %}
+{% block index %}
+<style>
+  a:hover{
+    color: blue;
+  }
+</style>
+<section class="section doctors">
+  <div class="container">
+
+      <div class="col-12 text-center  mb-5">
+	        <div class="btn-group btn-group-toggle " >
+	          <label class="btn " style="background-color:#e12454;">
+              <a href="/user-filterbydept">All</a>
+	          </label>
+            {% for dept in departments %}
+	          <label class="btn " style="background-color:#e12454;">
+              <a href="/user-filterbydept?deptid={{dept.id}}">{{dept.departmentname}}</a>
+	          </label>
+            {% endfor %}
+	        </div>
+      </div>
+
+    <div class="row shuffle-wrapper portfolio-gallery">
+      	
+      {% for doctor in doctors %}
+      
+      <div class="col-lg-3 col-sm-6 col-md-6 mb-4 shuffle-item" >
+        	<div class="position-relative doctor-inner-box">
+		        <div class="doctor-profile">
+		        	<div class="doctor-img">
+		               <img src="../../static/media/{{doctor.doc_image}}" alt="doctor-image" class="img-fluid w-100">
+		            </div>
+	            </div>
+                <div class="content mt-3">
+                	<h4 class="mb-0"><a href="/user-viewsingledoctor?docid={{doctor.id}}">{{doctor.firstname}} {{doctor.lastname}}</a></h4>
+                	<p>{{doctor.department.departmentname}}</p>
+                </div> 
+	      	</div>
+      </div>
+
+      {% endfor %}
+      
+    </div>
+  </div>
+</section>
+{% endblock index %}

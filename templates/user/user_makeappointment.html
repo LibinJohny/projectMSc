@@ -1,0 +1,46 @@
+{% extends 'user/user_dashboard.html' %}
+{% block index %}
+<section class="appoinment section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+                <form action="" method="post">
+                    {% csrf_token %}
+                <h2 class="text-color mt-3">Choose Date</h2>
+                <input value="{{dateselected}}" type="date" min="{{toda}}" id="appoinment-date" data-date-format="DD MMMM YYYY" name="appoinment-date">
+                <button type="submit">Select</button>
+                </form>
+            </div>
+           
+              </script>
+             <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+              <h2 class="mb-2 title-color">Available Slots</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Slots</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for start, end in time_slots %}
+                    <form action="/user-add-appointment/" method="post">
+                        {% csrf_token %}
+                    <tr>
+                        <input value="{{dateselected}}" type="hidden" name="appoinment-date">
+                        <input type="hidden" value="{{doctorid}}" name="doctorid">
+                        <input type="hidden" value="{{ start }} - {{ end }}" name="selectedslot">
+                        <td>{{ start }} - {{ end }}</td>
+                        <td><button type="submit">Select</button></td>
+                    </tr>
+                    </form>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock index %}

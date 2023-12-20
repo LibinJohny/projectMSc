@@ -1,0 +1,39 @@
+{% extends 'user/user_dashboard.html' %}
+{% block index %}
+<section class="appoinment section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+             <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+              <h2 class="mb-2 title-color">Current Appointments</h2>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Booked On</th>
+                    <th scope="col">Doctor Data</th>
+                    <th scope="col">Appointment Date</th>
+                    <th scope="col">Slot time</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{appointment.booked_date}}</td>
+                        <td><h4 class="mb-0"><a href="/user-viewsingledoctor?docid={{appointment.doctor.id}}">{{appointment.doctor.firstname}} {{appointment.doctor.lastname}}</a></h4>
+                            <p>{{appointment.doctor.department.departmentname}}</p></td>
+                        <td>{{appointment.appointment_date}}</td>
+                        <td>{{appointment.slottime}}</td>
+                        <td><a href="/user-changeappointment?appointmentid={{appointment.id}}&docid={{appointment.doctor.id}}" class="btn btn-main-2 btn-round-full mt-3 mr-2">Change</a>
+                            <a href="/user-deleteappointment?appointmentid={{appointment.id}}" class="btn btn-main-2 btn-round-full mt-3">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock index %}

@@ -1,0 +1,29 @@
+{% extends 'user/user_dashboard.html' %}
+{% block index %}
+<section class="section doctor-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<div class="doctor-img-block">
+					<div class="info-block mt-4">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-6">
+				<div class="doctor-details mt-4 mt-lg-0">
+					<h2 class="text-md">{{user.firstname}}{{user.lastname}}</h2>
+					<p>Email: {{user.email}}</p>
+					<p>Phone: {{user.phone}}</p>
+                    <p>Age: {{user.age}}</p>
+					<p>Place: {{user.place}}</p>
+                    <p>Address: {{user.address}}</p>
+                    <div class="row">
+                        <a href="/user-updateprofile?userid={{user.id}}" class="btn btn-main-2 btn-round-full mt-3 mr-2">Update</a>
+                        <a href="/user-deleteprofile?userid={{user.id}}" class="btn btn-main-2 btn-round-full mt-3">Delete</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock index %}

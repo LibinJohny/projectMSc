@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block navbar %}
+{% for message in messages %}
+<script>
+    alert('{{message}}')
+</script>
+{% endfor %}
+<div class="collapse navbar-collapse" id="navbarmain">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/user-dashboard">User</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/chat">Chat</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user-viewdoctors">View Doctors</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user-viewappointments">Appointments</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user-viewhistory">History</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/user-viewprofile">Profile</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Logout</a>
+      </li>
+    </ul>
+  </div>
+{% endblock navbar %}
+
+{% block index %}
+
+{% endblock index %}

@@ -1,0 +1,54 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block index %}
+<section class="section doctor-single">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6">
+				<div class="doctor-img-block">
+					<img src="../../static/media/{{doctor.doc_image}}" alt="" class="img-fluid w-100">
+					<div class="info-block mt-4">
+						<h4 class="mb-0">{{doctor.firstname}}{{doctor.lastname}}</h4>
+						<p>{{doctor.department.departmentname}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-8 col-md-6">
+				<div class="doctor-details mt-4 mt-lg-0">
+					<h2 class="text-md">Basic info</h2>
+					<div class="divider my-4"></div>
+					<p>Email: {{doctor.email}}</p>
+					<p>Phone: {{doctor.phone}}</p>
+                    <div class="col-lg-8">
+                        <div class="sidebar-widget  gray-bg p-4 ">
+                            <h5 class="mb-4">Available days</h5>
+                            <ul class="list-unstyled lh-35">
+                                {% if doctor.availabledays == '1' %}
+                              <li class="d-flex justify-content-between align-items-center">
+                                <a href="#">All</a>
+                                <span>{{doctor.timefrom}} - {{doctor.timeto}}</span>
+                              </li>
+                              {% elif doctor.availabledays == '2' %}
+                              <li class="d-flex justify-content-between align-items-center">
+                                <a href="#">Monday - Friday</a>
+                                <span>{{doctor.timefrom}} - {{doctor.timeto}}</span>
+                              </li>
+                              {% elif doctor.availabledays == '3' %}
+                              <li class="d-flex justify-content-between align-items-center">
+                                <a href="#">Monday - Saturday</a>
+                                <span>{{doctor.timefrom}} - {{doctor.timeto}}</span>
+                              </li>
+                              {% endif %}
+                            </ul>
+                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="/admin-updatedoctor?docid={{doctor.id}}" class="btn btn-main-2 btn-round-full mt-3 mr-2">Update</a>
+                        <a href="/admin-deletedoctor?docid={{doctor.id}}" class="btn btn-main-2 btn-round-full mt-3">Delete</a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock index %}

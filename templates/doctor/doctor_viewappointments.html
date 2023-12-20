@@ -1,0 +1,59 @@
+{% extends 'doctor/doctor_dashboard.html' %}
+{% block index %}
+<section class="appoinment section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+                <form action="" method="post">
+                    {% csrf_token %}
+                <h2 class="text-color mt-3">Choose Date</h2>
+                <input value="{{ddate}}" type="date" name="doctor-date">
+                <button type="submit">Select</button>
+                </form>
+            </div>
+             <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+                {{ today|date:"Y-m-d" }}
+                {% if ddate == today|date:"Y-m-d" %}
+              <h2 class="mb-2 title-color">Todays Appointments</h2>
+              {% else %}
+              <h2 class="mb-2 title-color">{{ddate}} Appointments</h2>
+              {% endif %}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Booked On</th>
+                    <th scope="col">User Data</th>
+                    <th scope="col">Appointment Date</th>
+                    <th scope="col">Slot time</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr>
+                        <td>{{appointment.booked_date}}</td>
+                        <td><p>{{appointment.user.firstname}} {{appointment.user.lastname}}</p>
+                            <p>Email: {{appointment.user.email}}</p>
+                            <p>Phone: {{appointment.user.phone}}</p>
+                            <p>Age: {{appointment.user.age}}</p>
+                            <p>Place: {{appointment.user.place}}</p>
+                            <p>Address: {{appointment.user.address}}</p></td>
+                        <td>{{appointment.appointment_date}}</td>
+                        <td>{{appointment.slottime}}</td>
+                        
+                        {% if datebool == 'todaysdate' %}
+                        <td><a href="/doctor-changeappointmentstatus?appointmentid={{appointment.id}}" class="btn btn-main-2 btn-round-full mt-3 mr-2">Complete</a>
+                        </td>
+                        {% endif %}
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock index %}

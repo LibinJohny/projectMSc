@@ -1,0 +1,103 @@
+{% extends 'admin/admin_dashboard.html' %}
+{% block index %}
+<section class="contact-form-wrap section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-title text-center">
+                    <h2 class="text-md mb-2">Update Doctor</h2>
+                    <div class="divider mx-auto my-4"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 ">
+                <form  method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <img src="../../static/media/{{doctor.doc_image}}" style="width: 30% !important; height: 125px;" class="img-fluid w-100" alt="">
+                                <input name="dimage"  type="file" class="form-control" placeholder="" >
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <input name="fname" id="" type="text" value="{{doctor.firstname}}" class="form-control" placeholder="First name" >
+                            </div>
+                        </div>
+                         <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <input name="lname" id="" type="text" value="{{doctor.lastname}}" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <input name="email" id="" type="email" value="{{doctor.email}}" class="form-control" placeholder="Email" >
+                            </div>
+                        </div>
+                         <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <input name="phone" id="" type="text" value="{{doctor.phone}}" class="form-control" placeholder="Phone">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mx-auto">
+                            <div class="form-group">
+                                <input type="text" value="{{doctor.department.departmentname}}">
+                                <select name="dept" id="" style="height: 60px;
+                                border: 1px solid #EEF2F6;
+                                box-shadow: none;
+                                width: 100%;
+                                background: #f4f9fc; color: #495057;">
+                                    <option  class="value" selected disabled>Choose Department</option>
+                                    {% for department in departments %}
+                                    <option value="{{department.id}}" class="value">{{department.departmentname}}</option>
+                                    {% endfor %}
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mx-auto">
+                            {% if doctor.availabledays == "1" %}
+                            <input type="text" value="All">
+                            {% elif doctor.availabledays == "2" %}
+                            <input type="text" value="Monday - Friday">
+                            {% elif doctor.availabledays == "3" %}
+                            <input type="text" value="Monday - Saturday">
+                            {% endif %}
+                            <div class="form-group">
+                                <select name="availableday" id="" style="height: 60px;
+                                border: 1px solid #EEF2F6;
+                                box-shadow: none;
+                                width: 100%;
+                                background: #f4f9fc; color: #495057;">
+                                    <option value="" class="value" selected disabled>Available days</option>
+                                    <option value="1" class="value">All</option> 
+                                    <option value="2" class="value">Monday - Friday</option> 
+                                    <option value="3" class="value">Monday - Saturday</option>           
+                                </select>
+                            </div>
+                        </div>
+                        
+                            <div class="col-lg-6 mx-auto">
+                                <label for="timefrom">From:</label>
+                                <div class="form-group">
+                                    <input name="timefrom" id="" value="{{doctor.timefrom|time:'H:i'}}"  type="time" class="form-control" placeholder="From" >
+                                </div>
+                            </div>
+                            <div class="col-lg-6 mx-auto ">
+                                <label for="timefrom">To:</label>
+                                <div class="form-group">
+                                    <input name="timeto" id="" value="{{doctor.timeto|time:'H:i'}}"  type="time" class="form-control" placeholder="To" >
+                                </div>
+                            </div>
+                        
+                        
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-main btn-round-full">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock index %}
