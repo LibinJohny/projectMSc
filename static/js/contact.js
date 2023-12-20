@@ -1,5 +1,5 @@
 (function ($) {
-    'use strict';
+    'use strict'; // firstcomment
 
     var form = $('.contact__form'),
         message = $('.contact__msg'),
